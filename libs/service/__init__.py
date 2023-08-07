@@ -6,8 +6,9 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import TextSendMessage, MessageEvent, TextMessage
 from fastapi.openapi.docs import get_swagger_ui_html, get_redoc_html
 
-from libs.chatbot import ChatBot_Object
 from libs import configs
+from libs.configs.logger import Logger
+from libs.chatbot import ChatBot_Object
 
 
 class Service(FastAPI):
@@ -39,10 +40,15 @@ class Service(FastAPI):
                     title=f"{configs.SERVERTITLE} | ReDOC UI",
                 )
 
+        @self.on_event("startup")
+        def startup_event():
+            for log_name in configs.ACCESS_LOG_NAMES:
+                Logger.setup_logger(log_name)
+
+    def register_linebot_event_actions(self) -> None:
         @staticmethod
-        @self.post("/webhook/")
+        @self.post("/webhook/", include_in_schema=False)
         async def callback(request: Request) -> dict:
-            # 取得 request body
             body = await request.body()
             signature = request.headers["X-Line-Signature"]
             try:
@@ -69,4 +75,6 @@ class Service(FastAPI):
 
     def service_run(self) -> None:
         self.register_default_actions()
+        self.register_linebot_event_actions()
+
         uvicorn.run(self, host=configs.HOST, port=configs.PORT)

@@ -35,3 +35,14 @@ STARTEVENT_TEXT = "#秘書"  # 設定觸發事件的文字
 OPENAI = openai
 OPENAI.api_key = os.getenv("OPEN_API_KEY")
 OPENAI_USE_MODEL = "gpt-3.5-turbo"
+
+
+# *----- Server Access Log Setting -----*
+ACCESS_LOG_NAMES = ["uvicorn", "uvicorn.access", "uvicorn.error"]
+ACCESS_LOG_SIZE = 1000  # 單位為 KB
+ACCESS_LOG_LEVEL = "DEBUG"
+ACCESS_LOG_PATH = "logs"
+ACCESS_LOG_FILE_NAME = "piNews_LineBot_ACCESS_LOG.log"
+ACCESS_LOG_BACKUP_COUNT = 5
+ACCESS_LOG_MODE = "a"
+ACCESS_LOG_ENCODING = "utf-8"
