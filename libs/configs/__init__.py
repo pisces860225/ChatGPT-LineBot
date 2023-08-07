@@ -1,7 +1,8 @@
+import os
+import openai
 from dotenv import load_dotenv
 from linebot import LineBotApi, WebhookHandler
 
-import os
 from libs.configs.__version__ import __version__
 
 # read .env file
@@ -31,5 +32,6 @@ STARTEVENT_TEXT = "#秘書"  # 設定觸發事件的文字
 
 
 # *----- OpenAI (ChatGPT) Setting -----*
-OPEN_API_KEY = os.getenv("OPEN_API_KEY")
-CHATGPT_USE_MODEL = "gpt-3.5-turbo"
+OPENAI = openai
+OPENAI.api_key = os.getenv("OPEN_API_KEY")
+OPENAI_USE_MODEL = "gpt-3.5-turbo"

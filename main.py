@@ -5,7 +5,7 @@ from libs import configs
 Args().debug_controller()
 
 
-def pinew_linebot_program():
+def pinew_linebot_program() -> None:
     app = Service(
         title=configs.SERVERTITLE,
         description=configs.DESCRIPTION,
@@ -14,7 +14,7 @@ def pinew_linebot_program():
     app.service_run()
 
 
-def main():
+def main() -> None:
     pinew_linebot_program()
 
 

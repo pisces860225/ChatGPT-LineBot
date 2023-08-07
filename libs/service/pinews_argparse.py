@@ -9,7 +9,7 @@ class Args:
             formatter_class=RawTextHelpFormatter,
         )
 
-    def str_to_bool(self, value):
+    def str_to_bool(self, value: str | bool) -> bool:
         if isinstance(value, bool):
             return value
         elif value.lower() in ("true", "t"):
@@ -19,7 +19,7 @@ class Args:
         else:
             raise ArgumentTypeError(f"Invalid boolean value: {value}")
 
-    def debug_controller(self):
+    def debug_controller(self) -> None:
         self.parser.add_argument(
             "-d5",
             "--debug",
