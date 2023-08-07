@@ -9,11 +9,9 @@ load_dotenv()
 
 app = FastAPI()
 
-# 使用你的 Channel Access Token 和 Channel Secret
 CHANNEL_ACCESS_TOKEN = os.getenv("CHANNEL_ACCESS_TOKEN")
 CHANNEL_SECRET = os.getenv("CHANNEL_SECRET")
-# CHANNEL_ACCESS_TOKEN = "LoKrBjU0m+xx1bmPqTPaNE11fio8mtpnh0S0GEJrU5SChQKROYIh11vt1CFNszu7RcL/x6Cetvb5MLta+Ht1XOI8NLKTu7u1zq9i5s0dgbJShE3yT5fsQyjopyobw/SeAb7yZaF7iopXxaPTpdO5GwdB04t89/1O/w1cDnyilFU="
-# CHANNEL_SECRET = "18aa4c8307b96d276ccf080475c7fe3b"
+
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(CHANNEL_SECRET)
 
@@ -34,7 +32,7 @@ async def callback(request: Request):
 def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=event.message.text)  # 簡單地回覆相同訊息
+        TextSendMessage(text=event.message.text)
     )
 
 if __name__ == "__main__":
