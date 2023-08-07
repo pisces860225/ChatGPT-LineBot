@@ -27,6 +27,8 @@ CHANNEL_SECRET = os.getenv("CHANNEL_SECRET")
 LINEBOT_API = LineBotApi(CHANNEL_ACCESS_TOKEN)
 LINEBOT_HANDLER = WebhookHandler(CHANNEL_SECRET)
 
+STARTEVENT_TEXT = "#秘書"  # 設定觸發事件的文字
+
 
 # *----- OpenAI (ChatGPT) Setting -----*
 OPEN_API_KEY = os.getenv("OPEN_API_KEY")

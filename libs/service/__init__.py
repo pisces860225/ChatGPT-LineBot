@@ -56,7 +56,7 @@ class Service(FastAPI):
         @configs.LINEBOT_HANDLER.add(MessageEvent, message=TextMessage)
         def handle_message(event):
             user_text = event.message.text
-            if user_text.startswith("#秘書"):
+            if user_text.startswith(configs.STARTEVENT_TEXT):
                 response_text = ChatGPT_Object.chat_completion(user_text)
                 configs.LINEBOT_API.reply_message(
                     event.reply_token, TextSendMessage(text=response_text)
