@@ -1,6 +1,6 @@
+from libs import configs
 from libs.service import Service
 from libs.service.pinews_argparse import Args
-from libs import configs
 
 
 Args().debug_controller()

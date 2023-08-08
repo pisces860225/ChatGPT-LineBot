@@ -67,7 +67,7 @@ class Service(FastAPI):
             Line Bot processes Event text message logic segment.
             """
             user_text = event.message.text
-            if user_text.startswith(configs.STARTEVENT_TEXT):
+            if user_text.startswith(configs.Start_Event_Text.question_keyword):
                 response_text = ChatBot_Object.chat_completion(user_text)
                 configs.LINEBOT_API.reply_message(
                     event.reply_token, TextSendMessage(text=response_text)

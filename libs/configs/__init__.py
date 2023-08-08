@@ -6,7 +6,8 @@ from linebot import LineBotApi, WebhookHandler
 from libs.configs.__version__ import __version__
 
 # read .env file
-load_dotenv()
+ENV_FILE_PATH = os.path.join(os.getcwd().replace("\\", "/"), ".env")
+load_dotenv(ENV_FILE_PATH)
 
 # *----- piNews Server Setting -----*
 DEBUG = os.getenv("DEBUG")
@@ -28,12 +29,18 @@ CHANNEL_SECRET = os.getenv("CHANNEL_SECRET")
 LINEBOT_API = LineBotApi(CHANNEL_ACCESS_TOKEN)
 LINEBOT_HANDLER = WebhookHandler(CHANNEL_SECRET)
 
-STARTEVENT_TEXT = "#秘書"  # 設定觸發事件的文字
+
+class Start_Event_Text:
+    """
+    Line Bot processes Event text message logic segment.
+    """
+
+    question_keyword = "#秘書"
 
 
 # *----- OpenAI (ChatGPT) Setting -----*
 OPENAI = openai
-OPENAI.api_key = os.getenv("OPEN_API_KEY")
+OPENAI.api_key = os.getenv("OPENAI_API_KEY")
 OPENAI_USE_MODEL = "gpt-3.5-turbo"
 
 
