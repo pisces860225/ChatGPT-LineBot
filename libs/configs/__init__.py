@@ -35,7 +35,8 @@ class Start_Event_Text:
     Line Bot processes Event text message logic segment.
     """
 
-    question_keyword = "#秘書"
+    question_keyword = "#文秘書"
+    imagecreater_keyword = "#圖秘書"
 
 
 # *----- OpenAI (ChatGPT) Setting -----*

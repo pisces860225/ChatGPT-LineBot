@@ -3,12 +3,13 @@ from typing import Callable
 from fastapi import FastAPI, Request, status
 from starlette.responses import HTMLResponse
 from linebot.exceptions import InvalidSignatureError
-from linebot.models import TextSendMessage, MessageEvent, TextMessage
+from linebot.models import MessageEvent, TextMessage
 from fastapi.openapi.docs import get_swagger_ui_html, get_redoc_html
 
 from libs import configs
 from libs.configs.logger import Logger
-from libs.chatbot import ChatBot_Object
+from libs.openAI import ChatBot_Object
+from libs.chatbot import LineBot_Object
 
 
 class Service(FastAPI):
@@ -67,11 +68,20 @@ class Service(FastAPI):
             Line Bot processes Event text message logic segment.
             """
             user_text = event.message.text
-            if user_text.startswith(configs.Start_Event_Text.question_keyword):
-                response_text = ChatBot_Object.chat_completion(user_text)
-                configs.LINEBOT_API.reply_message(
-                    event.reply_token, TextSendMessage(text=response_text)
-                )
+            keyword, _, rest_of_text = user_text.partition(" ")
+
+            match keyword:
+                case configs.Start_Event_Text.question_keyword:
+                    response_text = ChatBot_Object.chat_completion(rest_of_text)
+                    LineBot_Object.reply_text_to_user(event, response_text)
+                case configs.Start_Event_Text.imagecreater_keyword:
+                    response_text = ChatBot_Object.image_completion(rest_of_text)
+                    if isinstance(response_text, str):
+                        LineBot_Object.reply_text_to_user(event, response_text)
+                    else:
+                        LineBot_Object.reply_images_to_user(event, response_text)
+                case _:
+                    pass
 
     def service_run(self) -> None:
         self.register_default_actions()
