@@ -2,7 +2,7 @@ import json
 from libs import configs
 
 
-class ChatBot_Object:
+class OpenAI_Object:
     @staticmethod
     def chat_completion(messages: str) -> str:
         response = configs.OPENAI.ChatCompletion.create(
@@ -23,9 +23,27 @@ class ChatBot_Object:
 
             image_urls = response["data"]
 
-            message_content = (url["url"] for url in image_urls)
+            message_content = tuple(url["url"] for url in image_urls)
 
         except configs.OPENAI.InvalidRequestError:
             message_content = "您輸入的關鍵字，可能不適合產生圖片，請更換關鍵字後，再試一次。"
 
+        return message_content
+
+    @staticmethod
+    def audio_transcription(file_path: str) -> str:
+        with open(file_path, "rb") as audio_file:
+            response = json.loads(
+                str(configs.OPENAI.Audio.transcribe("whisper-1", audio_file))
+            )
+        message_content = response["text"]
+        return message_content
+
+    @staticmethod
+    def audio_translation(file_path: str) -> str:
+        with open(file_path, "rb") as audio_file:
+            response = json.loads(
+                str(configs.OPENAI.Audio.translate("whisper-1", audio_file))
+            )
+        message_content = response["text"]
         return message_content

@@ -1,5 +1,6 @@
 import os
 import openai
+
 from dotenv import load_dotenv
 from linebot import LineBotApi, WebhookHandler
 
@@ -30,15 +31,6 @@ LINEBOT_API = LineBotApi(CHANNEL_ACCESS_TOKEN)
 LINEBOT_HANDLER = WebhookHandler(CHANNEL_SECRET)
 
 
-class Start_Event_Text:
-    """
-    Line Bot processes Event text message logic segment.
-    """
-
-    question_keyword = "#文秘書"
-    imagecreater_keyword = "#圖秘書"
-
-
 # *----- OpenAI (ChatGPT) Setting -----*
 OPENAI = openai
 OPENAI.api_key = os.getenv("OPENAI_API_KEY")
@@ -48,7 +40,7 @@ OPENAI_USE_MODEL = "gpt-3.5-turbo"
 # *----- Server Access Log Setting -----*
 ACCESS_LOG_NAMES = ["uvicorn", "uvicorn.access", "uvicorn.error"]
 ACCESS_LOG_SIZE = 1000  # 單位為 KB
-ACCESS_LOG_LEVEL = "DEBUG"
+ACCESS_LOG_LEVEL = "DEBUG" if DEBUG else "INFO"
 ACCESS_LOG_PATH = "logs"
 ACCESS_LOG_FILE_NAME = "piNews_LineBot_ACCESS_LOG.log"
 ACCESS_LOG_BACKUP_COUNT = 5
