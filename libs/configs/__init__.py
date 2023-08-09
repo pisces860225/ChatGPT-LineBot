@@ -23,17 +23,17 @@ def get_env_variable(key):
     return value
 
 
-# *----- piNews Server Setting -----*
+# *----- Prophet Server Setting -----*
 DEBUG = get_env_variable("DEBUG")
-DOCS_URL = "/PiNews_LineBot/Swagger_UI"
-REDOC_URL = "/PiNews_LineBot/API_redoc"
-SERVERTITLE = "PiNews_LineBot"
+DOCS_URL = "/Prophet_LineBot/Swagger_UI"
+REDOC_URL = "/Prophet_LineBot/API_redoc"
+SERVERTITLE = "Prophet_LineBot"
 VERSION = __version__
 HOST = "0.0.0.0"
 PORT = 8000
 DESCRIPTION = """
 
-## PiNews_LineBot
+## Prophet_LineBot
 
 """
 
