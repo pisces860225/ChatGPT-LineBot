@@ -42,14 +42,23 @@ class ChatBot_Router:
         keyword, _, rest_of_text = user_text.partition(" ")
         match keyword:
             case StartEventTextKeywords.VERSION.value:
+                """
+                查看先知版本
+                """
                 response_text = f"{configs.SERVERTITLE} Version: v{configs.VERSION}\nOpenAI 使用的模型版本: {configs.OPENAI_USE_MODEL}"
                 LineBot_Object.reply_text_to_user(event, response_text)
 
             case StartEventTextKeywords.QUESTION.value:
+                """
+                文字生成器
+                """
                 response_text = OpenAI_Object.chat_completion(rest_of_text)
                 LineBot_Object.reply_text_to_user(event, response_text)
 
             case StartEventTextKeywords.IMAGE_CREATOR.value:
+                """
+                圖片生成器
+                """
                 response_text = OpenAI_Object.image_completion(rest_of_text)
                 if isinstance(response_text, str):
                     """
@@ -60,6 +69,9 @@ class ChatBot_Router:
                     LineBot_Object.reply_images_to_user(event, response_text)
 
             case StartEventTextKeywords.CANDO_LIST.value:
+                """
+                能做的事情
+                """
                 response_text = "目前能做的指令分別為:\n\n"
                 for index, enum_item in enumerate(StartEventTextKeywords):
                     response_text += f"{index+1}. {enum_item.value}\n"
