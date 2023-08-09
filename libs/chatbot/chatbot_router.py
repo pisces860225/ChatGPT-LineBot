@@ -59,5 +59,11 @@ class ChatBot_Router:
                 else:
                     LineBot_Object.reply_images_to_user(event, response_text)
 
+            case StartEventTextKeywords.CANDO_LIST.value:
+                response_text = "目前能做的指令分別為:\n\n"
+                for index, enum_item in enumerate(StartEventTextKeywords):
+                    response_text += f"{index+1}. {enum_item.value}\n"
+                LineBot_Object.reply_text_to_user(event, response_text)
+
             case _:
                 pass
