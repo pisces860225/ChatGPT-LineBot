@@ -1,0 +1,10 @@
+# Spacefile Docs: https://go.deta.dev/docs/spacefile/v0
+v: 0
+micros:
+  - name: ChatGPT-LineBot
+    src: ./
+    engine: python3.10
+    primary: true
+    commands:
+      - pip install -r requirements.txt
+      - python main.py
