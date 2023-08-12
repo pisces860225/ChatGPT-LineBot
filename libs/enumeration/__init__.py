@@ -10,6 +10,3 @@ class StartEventTextKeywords(Enum):
     QUESTION = "#文先知"
     IMAGE_CREATOR = "#圖先知"
     CANDO_LIST = "#能做什麼"
-
-    def __str__(self):
-        return self.value
