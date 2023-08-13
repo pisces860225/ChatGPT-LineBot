@@ -1,3 +1,4 @@
+import re
 from linebot.models import MessageEvent, TextMessage
 from linebot.exceptions import InvalidSignatureError
 from fastapi.responses import JSONResponse
@@ -39,7 +40,11 @@ class ChatBot_Router:
         Line Bot processes Event text message logic segment.
         """
         user_text = event.message.text
-        keyword, _, rest_of_text = user_text.partition(" ")
+        # keyword, _, rest_of_text = user_text.partition(" ")
+        split_text = re.split(r"[ ,，]", user_text, maxsplit=1)
+        keyword = split_text[0]
+        rest_of_text = split_text[1] if len(split_text) > 1 else ""
+
         match keyword:
             case StartEventTextKeywords.VERSION.value:
                 """

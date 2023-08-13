@@ -7,6 +7,6 @@ class StartEventTextKeywords(Enum):
     """
 
     VERSION = "#先知版本"
-    QUESTION = "#文先知"
-    IMAGE_CREATOR = "#圖先知"
+    QUESTION = "#秘書"
+    IMAGE_CREATOR = "#先知"
     CANDO_LIST = "#能做什麼"
