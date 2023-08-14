@@ -59,18 +59,19 @@ class ChatBot_Router:
                 response_text = OpenAI_Object.chat_completion(rest_of_text)
                 LineBot_Object.reply_text_to_user(event, response_text)
 
-            case StartEventTextKeywords.IMAGE_CREATOR.value:
-                """
-                圖片生成器
-                """
-                response_text = OpenAI_Object.image_completion(rest_of_text)
-                if isinstance(response_text, str):
-                    """
-                    圖片參數錯誤，或 openai 回傳錯誤時將會返回一組錯誤敘述
-                    """
-                    LineBot_Object.reply_text_to_user(event, response_text)
-                else:
-                    LineBot_Object.reply_images_to_user(event, response_text)
+            # 先關閉圖片生成器功能
+            # case StartEventTextKeywords.IMAGE_CREATOR.value:
+            #     """
+            #     圖片生成器
+            #     """
+            #     response_text = OpenAI_Object.image_completion(rest_of_text)
+            #     if isinstance(response_text, str):
+            #         """
+            #         圖片參數錯誤，或 openai 回傳錯誤時將會返回一組錯誤敘述
+            #         """
+            #         LineBot_Object.reply_text_to_user(event, response_text)
+            #     else:
+            #         LineBot_Object.reply_images_to_user(event, response_text)
 
             case StartEventTextKeywords.CANDO_LIST.value:
                 """
