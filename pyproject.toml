@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "chatgpt-linebot"
+version = "1.0.1"
+description = ""
+authors = ["jeremy.huang <jeremy55688@gmail.com>"]
+readme = "README.md"
+packages = [{include = "chatgpt_linebot"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+rich = "^13.5.2"
+fastapi = "^0.103.1"
+openai = "^0.28.0"
+uvicorn = "^0.23.2"
+requests = "^2.31.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

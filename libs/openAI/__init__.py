@@ -5,6 +5,10 @@ from libs import configs
 class OpenAI_Object:
     @staticmethod
     def chat_completion(messages: str) -> str:
+        """
+        messages: str
+        """
+
         response = configs.OPENAI.ChatCompletion.create(
             model=configs.OPENAI_USE_MODEL,
             messages=[
@@ -12,6 +16,7 @@ class OpenAI_Object:
                 {"role": "user", "content": f"請使用繁體中文回答，{messages}"},
             ],
         )
+
         return response.choices[0].message.content.strip()
 
     @staticmethod
